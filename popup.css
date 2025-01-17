@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 300px;
+    padding: 10px;
+    border: 5px solid #000;
+    background-color: #eff1f3;
+}
+
+header {
+    width: 100%;
+    height: 100;
+    overflow: hidden;
+}
+
+.header-image {
+    width: 100%;
+    height: 100%;
+}
+
+.action-bar {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #eff1f3;
+    border: 3px solid #000;
+    border-radius: 10px;
+}
+
+/* adapt from: author: Michael McMillan reference: https://getcssscan.com/css-buttons-examples */
+.button {
+    height: 25px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #000;
+    cursor: pointer;
+    border: 2px solid;
+    padding: 0em 0.5em;
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+/* adapt from: author: Michael McMillan reference: https://getcssscan.com/css-buttons-examples */
+.button:active {
+    box-shadow: 0px 0px 0px 0px;
+    top: 2px;
+    left: 2px;
+}
+
+.dropdown {
+    width: 150px;
+    height: 25px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-overflow: ellipsis;
+    color: #000;
+    cursor: pointer;
+    border: 2px solid;
+    padding: 0em 0.5em;
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.question-container {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #eff1f3;
+    border: 3px solid #000;
+    border-radius: 10px;
+}
+
+.list-item ,.message {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #000;
+    height: 40px;
+    margin: 2px;
+}
+
+.question-title {
+    font-family: "Open Sans", sans-serif;
+    display: inline-block;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+}
