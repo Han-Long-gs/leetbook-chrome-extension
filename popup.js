@@ -74,18 +74,19 @@ document.addEventListener("DOMContentLoaded", () => {
         saveAll();
         renderProblems(filter.value);
     };
-
-    // re-render the problemList everytime the storage changed
-    // TODO
-    // chrome.storage.onChanged.addEventListener( () => {
-
-    // });
-    
     
     // add a new problem automatically by submitting the wrong answer
     // TODO
-    
 
+
+    // delete a problem by delete-btn
+    const deleteProblem = (qtitle) => {
+        delete storageCache[qtitle];
+        allProblems = Object.values(storageCache);
+        saveAll();
+        renderProblems(filter.value);
+    }
+    
     // render all the problems for the given topic in problem-list
     const renderProblems = (topic) => {
         problemList.innerHTML = "";
@@ -109,11 +110,28 @@ document.addEventListener("DOMContentLoaded", () => {
             listItem.innerHTML = `
                 <span class="problem-title" title="${qtitle}">${qtitle}</span>
                 <div class="list-button-group">
-                    <button class="button" id="redo-btn">Redo</button>
-                    <button class="button" id="delete-btn">X</button>
+                    <button class="button redo-btn">Redo</button>
+                    <button class="button delete-btn">X</button>
                 </div>
             `;
             problemList.appendChild(listItem);
+
+            const redoBtn = listItem.querySelector(".redo-btn");
+            redoBtn.addEventListener("click", () => {
+                const url = storageCache[qtitle].url;
+                chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+                    const currentTabId = tabs[0].id;
+                    chrome.tabs.update(currentTabId, {
+                        url: url,
+                        active: true
+                    });
+                });
+            });
+
+            const deleteBtn = listItem.querySelector(".delete-btn");
+            deleteBtn.addEventListener("click", () => {
+                deleteProblem(qtitle);
+            })
         });
     };
 
@@ -122,8 +140,28 @@ document.addEventListener("DOMContentLoaded", () => {
         const newTopic = filter.value;
         renderProblems(newTopic);
     });
-
-
 })
 
-    
+// for test
+    // const problems = [
+    //     { title: "Two Sum", 
+    //       topics: ["array", "hash-table"], 
+    //       url: "https://leetcode.com/problems/two-sum/description/", 
+    //       failedTimes: 3 },
+    //     { title: "Add Two Numbers", 
+    //       topics: ["linked-list", "math"], 
+    //       url: "https://leetcode.com/problems/add-two-numbers/description/", 
+    //       failedTimes: 1 },
+    //     { title: "Longest Substring Without Repeating Characters", 
+    //       topics: ["string", "sliding-window"], 
+    //       url: "https://leetcode.com/problems/longest-substring-without-repeating-characters/description/",
+    //       failedTimes: 5 },
+    //     { title: "Median of Two Sorted Arrays", 
+    //       topics: ["array", "binary-search"],
+    //       url: "https://leetcode.com/problems/median-of-two-sorted-arrays/description/",
+    //       failedTimes: 2 },
+    //     { title: "Longest Palindromic Substring", 
+    //       topics: ["string", "dynamic-programming"],
+    //       url: "https://leetcode.com/problems/longest-palindromic-substring/description/",
+    //       failedTimes: 4 },
+    //   ];    
