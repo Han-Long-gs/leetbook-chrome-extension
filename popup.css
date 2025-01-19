@@ -79,7 +79,7 @@ header {
     touch-action: manipulation;
 }
 
-.question-container {
+.problem-container {
     display: flex;
     width: 100%;
     padding: 10px;
@@ -100,7 +100,7 @@ header {
     margin: 2px;
 }
 
-.question-title {
+.problem-title {
     font-family: "Open Sans", sans-serif;
     display: inline-block;
     width: 150px;

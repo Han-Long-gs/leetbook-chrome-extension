@@ -1,19 +1,25 @@
 {
-    "name": "LeetBook",
-    "description": "Keep track of all questions with failed submissions on LeetCode",
-    "version": "1.0",
-    "manifest_version": 3,
-    "permissions": [
-        "storage",
-        "activeTab",
-        "scripting"
-    ],
-    "host_permissions": [
-        "https//leetcode.com/*"
-    ],
-    "action": {
-        "default_popup": "popup.html",
-        "default_icon": "./images/icon.png"
+  "name": "LeetBook",
+  "description": "Keep track of all problems with failed submissions on LeetCode",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["storage", "activeTab", "scripting", "tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+        "matches": [
+            "https://leetcode.com/problems/*",
+            "https://leetcode.com/problems/*/*"
+        ],
+        "js": ["content.js"]
     }
-
+    ],
+  "host_permissions": ["https://leetcode.com/*"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "LeetBook",
+    "default_icon": "./images/icon.png"
+  }
 }
