@@ -40,8 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // send message to content.js to retrieve the problem title from leetcode DOM
             if (tab.url && 
-                tab.url.includes("leetcode.com/problems/") &&
-                tab.url.includes("/description")) {
+                tab.url.includes("leetcode.com/problems/")) {
                     chrome.tabs.sendMessage(tab.id, { 
                         action: "GET_PROBLEM_TITLE",
                         url: tab.url
@@ -74,10 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
         saveAll();
         renderProblems(filter.value);
     };
-    
-    // add a new problem automatically by submitting the wrong answer
-    // TODO
-
 
     // delete a problem by delete-btn
     const deleteProblem = (qtitle) => {

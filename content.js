@@ -1,36 +1,36 @@
-const getProblemTitle = (url) => {
-    const problemHref = url.split("/")[4];
-    console.log(problemHref); // for test
-    const problemTitle = document.querySelector(`a[href="/problems/${problemHref}/"]`).textContent.trim();
-    console.log(problemTitle); // for test
-    processedUrl = `http://leetcode.com/problems/${problemHref}/description`;
-    return { problemTitle, processedUrl };
-};
-
-const getProblemTopics = (url) => {
-    const topicElements = document.querySelectorAll('a[href^="/tag/"]');
-    // Array.from transform the node list to a real list of DOM node, so that we can use map on it
-    const topics = Array.from(topicElements).map((e) => e.textContent.trim());
-    console.log(topics); // for test
-    return topics;
+const getProblem = (url) => {
+    try {
+        const problemHref = url.split("/")[4];
+        const problemTitle = document.querySelector(`a[href="/problems/${problemHref}/"]`).textContent.trim();
+        const topicElements = document.querySelectorAll('a[href^="/tag/"]');
+        if (!problemTitle || topicElements.length === 0) {
+            throw new Error();
+        }
+        // Array.from transform the node list to a real list of DOM node, so that we can use map on it
+        const topics = Array.from(topicElements).map((e) => e.textContent.trim());
+        const processedUrl = `http://leetcode.com/problems/${problemHref}/description/`;
+        console.log("get",problemTitle)
+        return { problemTitle, topics, processedUrl };
+    } catch (error) {
+        alert("Please go to the LeetCode problem's description page!\n example link: leetcode.com/problems/two-sum/description/");
+        return null;
+    }
 }
 
 // message is sent from popup when the add-btn is clicked
 // message = { action: describe what action to take, url: the url of the current active tab }
 // sendResponse: callback fn, send the parameter as response to popup
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    console.log(message.url); // for test
+    console.log(message.url);
 
     if (message.action === "GET_PROBLEM_TITLE") {
         if (message.url) {
-            // the processedUrl (for redo-btn) will be in this form exactly: leetcode.com/problems/{problemTitle}/description
-            const { problemTitle, processedUrl } = getProblemTitle(message.url);
-            const topicList = getProblemTopics(message.url);
-            console.log(problemTitle, processedUrl); // for test
+            const { problemTitle, topics, processedUrl } = getProblem(message.url);
+            console.log(problemTitle, processedUrl);
             if (problemTitle && processedUrl) {
                 sendResponse({
                     title: problemTitle,
-                    topics: topicList,
+                    topics: topics,
                     newUrl: processedUrl
                 });
             } else {

@@ -3,7 +3,7 @@
   "description": "Keep track of all problems with failed submissions on LeetCode",
   "version": "1.0",
   "manifest_version": 3,
-  "permissions": ["storage", "activeTab", "scripting", "tabs"],
+  "permissions": ["storage", "activeTab", "scripting", "tabs", "https://leetcode.com/*"],
   "background": {
     "service_worker": "background.js"
   },
@@ -13,7 +13,8 @@
             "https://leetcode.com/problems/*",
             "https://leetcode.com/problems/*/*"
         ],
-        "js": ["content.js"]
+        "js": ["content.js"],
+        "run_at": "document_end"
     }
     ],
   "host_permissions": ["https://leetcode.com/*"],
