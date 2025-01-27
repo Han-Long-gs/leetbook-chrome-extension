@@ -1,9 +1,9 @@
 {
-  "name": "LeetBook",
-  "description": "Keep track of all problems with failed submissions on LeetCode",
+  "name": "LeetBook: LeetCode Problems Keeper",
+  "description": "Keep track of all the problems that you want to practice later.",
   "version": "1.0",
   "manifest_version": 3,
-  "permissions": ["storage", "activeTab", "scripting", "tabs", "https://leetcode.com/*"],
+  "permissions": ["storage", "activeTab", "tabs", "https://leetcode.com/*"],
   "background": {
     "service_worker": "background.js"
   },

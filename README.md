@@ -1,8 +1,12 @@
-# LeetBook: Wrong Submission Keeper #
+# LeetBook: LeetCode Problems Keeper #
 
-This chrome extension helps you to effortlessly keep track of all the problems you previously failed. Organize your mistakes by topic and revisit them with just a single click, making your practice routine more efficient.
+## Description ##
+This extension helps users track their progress on LeetCode by saving failed problems and providing an easy way to revisit and redo them.
 
 ![Alt text](./images/preview.png "Preview")
+
+## Check it out on Chrome Store ##
+https://chromewebstore.google.com/detail/leetbook-leetcode-problem/pmlnbpgbcjnmgddjidfkfkcchboncmek
 
 ## Instructions ##
 1. Add a new problem: open LeetBook and press "+" button on the desired problem's !!!description!!! page, LeetBook will add the problem to the list for you.
